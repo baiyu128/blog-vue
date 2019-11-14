@@ -7,6 +7,7 @@ import cn.baiyu.common.controller.BaseController;
 import cn.baiyu.common.exception.GlobalException;
 import cn.baiyu.common.utils.QueryPage;
 import cn.baiyu.common.utils.R;
+import cn.baiyu.system.controller.vo.ArticleRqVo;
 import cn.baiyu.system.entity.SysArticle;
 import cn.baiyu.system.entity.SysCategory;
 import cn.baiyu.system.entity.SysTag;
@@ -94,9 +95,9 @@ public class ArticleController extends BaseController {
         return new R<>(data);
     }
 
-    @PostMapping("/list")
-    public R<Map<String, Object>> findByPage(@RequestBody SysArticle sysArticle, QueryPage queryPage) {
-        return new R<>(super.getData(articleService.list(sysArticle, queryPage)));
+    @GetMapping("/list")
+    public R<Map<String, Object>> findByPage(ArticleRqVo articleRqVo, QueryPage queryPage) {
+        return new R<>(super.getData(articleService.list(articleRqVo, queryPage)));
     }
 
     @GetMapping("{id}")

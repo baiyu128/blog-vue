@@ -29,9 +29,9 @@ public class LinkController extends BaseController {
         return new R<>(linkService.list(new QueryWrapper<>()));
     }
 
-    @PostMapping("/list")
-    public R list(@RequestBody SysLink link, QueryPage queryPage) {
-        return new R<>(super.getData(linkService.list(link, queryPage)));
+    @GetMapping("/list")
+    public R list(String name, QueryPage queryPage) {
+        return new R<>(super.getData(linkService.list(name, queryPage)));
     }
 
     @GetMapping("/{id}")

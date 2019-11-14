@@ -36,10 +36,10 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, SysTag> implements Ta
     }
 
     @Override
-    public IPage<SysTag> list(SysTag tag, QueryPage queryPage) {
+    public IPage<SysTag> list(String name, QueryPage queryPage) {
         IPage<SysTag> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysTag> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(tag.getName()), SysTag::getName, tag.getName());
+        queryWrapper.like(StringUtils.isNotBlank(name), SysTag::getName, name);
         queryWrapper.orderByDesc(SysTag::getId);
         return tagMapper.selectPage(page, queryWrapper);
     }

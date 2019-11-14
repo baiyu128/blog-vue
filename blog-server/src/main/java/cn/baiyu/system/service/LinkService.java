@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface LinkService  extends IService<SysLink> {
 
-    IPage<SysLink> list(SysLink link, QueryPage queryPage);
+    IPage<SysLink> list(String name, QueryPage queryPage);
 
     void add(SysLink link);
 

@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-input v-model="query.title" size="mini" placeholder="文章标题" style="width: 200px;" class="filter-item"/>
       <el-select v-model="query.category" size="mini" placeholder="选择分类" clearable class="filter-item" style="width: 130px">
-        <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.id" />
+        <el-option v-for="item in categoryList" :key="item.id" :label="item.name" :value="item.name" />
       </el-select>
       <el-button class="filter-item" size="mini" type="primary" icon="el-icon-search" @click="fetchData">
         查询

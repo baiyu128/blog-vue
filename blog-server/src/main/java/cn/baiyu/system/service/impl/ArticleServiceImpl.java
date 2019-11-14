@@ -3,6 +3,7 @@ package cn.baiyu.system.service.impl;
 import cn.baiyu.common.constans.CommonConstant;
 import cn.baiyu.common.exception.GlobalException;
 import cn.baiyu.common.utils.QueryPage;
+import cn.baiyu.system.controller.vo.ArticleRqVo;
 import cn.baiyu.system.entity.*;
 import cn.baiyu.system.entity.dto.ArchivesWithArticle;
 import cn.baiyu.system.mapper.ArticleMapper;
@@ -53,13 +54,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, SysArticle> i
     }
 
     @Override
-    public IPage<SysArticle> list(SysArticle sysArticle, QueryPage queryPage) {
+    public IPage<SysArticle> list(ArticleRqVo articleRqVo, QueryPage queryPage) {
         IPage<SysArticle> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysArticle> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.orderByDesc(SysArticle::getId);
-        queryWrapper.like(StringUtils.isNotBlank(sysArticle.getTitle()), SysArticle::getTitle, sysArticle.getTitle());
-        queryWrapper.like(StringUtils.isNotBlank(sysArticle.getAuthor()), SysArticle::getAuthor, sysArticle.getAuthor());
-        queryWrapper.eq(StringUtils.isNotBlank(sysArticle.getCategory()), SysArticle::getCategory, sysArticle.getCategory());
+        queryWrapper.like(StringUtils.isNotBlank(articleRqVo.getTitle()), SysArticle::getTitle, articleRqVo.getTitle());
+        queryWrapper.like(StringUtils.isNotBlank(articleRqVo.getAuthor()), SysArticle::getAuthor, articleRqVo.getAuthor());
+        queryWrapper.eq(StringUtils.isNotBlank(articleRqVo.getCategory()), SysArticle::getCategory, articleRqVo.getCategory());
         IPage<SysArticle> selectPage = articleMapper.selectPage(page, queryWrapper);
         findInit(selectPage.getRecords());
         return selectPage;

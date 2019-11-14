@@ -28,9 +28,9 @@ public class TagController extends BaseController {
         return new R<>(tagService.findAll());
     }
 
-    @PostMapping("/list")
-    public R findByPage(@RequestBody SysTag tag, QueryPage queryPage) {
-        return new R<>(super.getData(tagService.list(tag, queryPage)));
+    @GetMapping("/list")
+    public R findByPage(String name, QueryPage queryPage) {
+        return new R<>(super.getData(tagService.list(name, queryPage)));
     }
 
     @GetMapping("/{id}")

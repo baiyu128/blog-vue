@@ -25,13 +25,13 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, SysLoginLog
     private LoginLogMapper loginLogMapper;
 
     @Override
-    public IPage<SysLoginLog> list(SysLoginLog log, QueryPage queryPage) {
+    public IPage<SysLoginLog> list(String location, String filedTime, QueryPage queryPage) {
         IPage<SysLoginLog> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysLoginLog> queryWrapper = new QueryWrapper<SysLoginLog>().lambda();
-        queryWrapper.like(StringUtils.isNotBlank(log.getLocation()), SysLoginLog::getLocation, log.getLocation());
+        queryWrapper.like(StringUtils.isNotBlank(location), SysLoginLog::getLocation, location);
         queryWrapper.orderByDesc(SysLoginLog::getCreateTime);
-        if (StringUtils.isNotBlank(log.getFiledTime())) {
-            String[] split = log.getFiledTime().split(",");
+        if (StringUtils.isNotBlank(filedTime)) {
+            String[] split = filedTime.split(",");
             queryWrapper.gt(SysLoginLog::getCreateTime, split[0]);
             queryWrapper.lt(SysLoginLog::getCreateTime, split[1]);
         }

@@ -23,10 +23,10 @@ public interface TagService  extends IService<SysTag> {
     /**
      * 分页查询
      *
-     * @param tag 查询条件
+     * @param name 查询条件
      * @return
      */
-    IPage<SysTag> list(SysTag tag, QueryPage queryPage);
+    IPage<SysTag> list(String name, QueryPage queryPage);
 
     /**
      * 新增

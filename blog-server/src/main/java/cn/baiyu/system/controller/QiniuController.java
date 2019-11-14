@@ -132,20 +132,19 @@ public class QiniuController {
             try {
                 //将MutipartFile对象转换为File对象，相当于需要以本地作为缓冲区暂时储存文件
                 //获取文件在服务器的储存位置
-                File path = new File(ResourceUtils.getURL("classpath:").getPath());
-                File filePath = new File(path.getAbsolutePath(), "upload/");
-                if (!filePath.exists() && !filePath.isDirectory()) {
-                    log.info("目录不存在，创建目录===========>" + filePath);
-                    filePath.mkdir();
+                File path = new File(System.getProperty("user.dir") + "/upload/");
+                if (!path.exists() && !path.isDirectory()) {
+                    log.info("目录不存在，创建目录===========>" + path);
+                    path.mkdir();
                 }
                 String filename = file.getOriginalFilename(); //获取原始文件名称
                 key += filename.substring(filename.lastIndexOf(".")); //获取文件类型
 
-                File localFile = new File(filePath, key);
+                File localFile = new File(path, key);
                 file.transferTo(localFile); //写入磁盘
-                log.info("文件原始路径=========>" + filePath);
+                log.info("文件原始路径=========>" + path);
                 log.info("新文件名称===========>" + key);
-                FilePath = filePath + "/" + key;
+                FilePath = path + "/" + key;
 
                 //密钥配置
                 Auth auth = Auth.create(qiniu.getAk(), qiniu.getSk());

@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface CategoryService extends IService<SysCategory> {
 
-    IPage<SysCategory> list(SysCategory sysCategory, QueryPage queryPage);
+    IPage<SysCategory> list(String name, QueryPage queryPage);
 
     void add(SysCategory sysCategory);
 

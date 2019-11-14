@@ -1,6 +1,7 @@
 package cn.baiyu.system.service;
 
 import cn.baiyu.common.utils.QueryPage;
+import cn.baiyu.system.controller.vo.ArticleRqVo;
 import cn.baiyu.system.entity.SysArticle;
 import cn.baiyu.system.entity.dto.ArchivesWithArticle;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,11 +25,10 @@ public interface ArticleService extends IService<SysArticle> {
     /**
      * 分页查询
      *
-     * @param sysArticle
      * @param queryPage
      * @return
      */
-    IPage<SysArticle> list(SysArticle sysArticle, QueryPage queryPage);
+    IPage<SysArticle> list(ArticleRqVo articleRqVo, QueryPage queryPage);
 
     /**
      * 根据ID 查询

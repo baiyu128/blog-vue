@@ -39,12 +39,12 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, SysLog> implements Lo
     private ObjectMapper objectMapper;
 
     @Override
-    public IPage<SysLog> list(SysLog log, QueryPage queryPage) {
+    public IPage<SysLog> list(String username, String ip, QueryPage queryPage) {
         IPage<SysLog> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysLog> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.orderByDesc(SysLog::getId);
-        queryWrapper.like(StringUtils.isNotBlank(log.getUsername()), SysLog::getUsername, log.getUsername());
-        queryWrapper.like(StringUtils.isNotBlank(log.getIp()), SysLog::getIp, log.getIp());
+        queryWrapper.like(StringUtils.isNotBlank(username), SysLog::getUsername, username);
+        queryWrapper.like(StringUtils.isNotBlank(ip), SysLog::getIp, ip);
         return logMapper.selectPage(page, queryWrapper);
     }
 

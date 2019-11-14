@@ -24,10 +24,10 @@ public class LinkServiceImpl extends ServiceImpl<LinkMapper, SysLink> implements
     private LinkMapper linkMapper;
 
     @Override
-    public IPage<SysLink> list(SysLink link, QueryPage queryPage) {
+    public IPage<SysLink> list(String name, QueryPage queryPage) {
         IPage<SysLink> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysLink> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(link.getName()), SysLink::getName, link.getName());
+        queryWrapper.like(StringUtils.isNotBlank(name), SysLink::getName, name);
         queryWrapper.orderByDesc(SysLink::getId);
         return linkMapper.selectPage(page, queryWrapper);
     }

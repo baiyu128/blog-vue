@@ -2,9 +2,13 @@ import request from '@/utils/request'
 
 export function getList(data, query) {
   return request({
-    url: `/api/link/list?page=${query.page}&limit=${query.limit}`,
-    method: 'post',
-    data
+    url: `/api/link/list`,
+    method: 'get',
+    params: {
+      name: data.name,
+      page: query.page,
+      limit: query.limit
+    }
   })
 }
 

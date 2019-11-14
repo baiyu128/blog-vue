@@ -7,7 +7,7 @@
         </el-form-item>
         <el-form-item label="文章分类" style="display: inline-block">
           <el-select v-model="form.category" placeholder="请选择文章分类" style="width:400px">
-            <el-option v-for="item in categoryList" :label="item.name" :key="item.id" :value="item.id"></el-option>
+            <el-option v-for="item in categoryList" :label="item.name" :key="item.id" :value="item.name"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="文章标签" style="display: inline-block">

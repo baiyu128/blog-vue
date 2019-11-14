@@ -35,12 +35,12 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, SysComment> i
     }
 
     @Override
-    public IPage<SysComment> list(SysComment comment, QueryPage queryPage) {
+    public IPage<SysComment> list(String name,String url, QueryPage queryPage) {
         IPage<SysComment> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysComment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.orderByDesc(SysComment::getId);
-        queryWrapper.like(StringUtils.isNotBlank(comment.getName()), SysComment::getName, comment.getName());
-        queryWrapper.like(StringUtils.isNotBlank(comment.getUrl()), SysComment::getUrl, comment.getUrl());
+        queryWrapper.like(StringUtils.isNotBlank(name), SysComment::getName, name);
+        queryWrapper.like(StringUtils.isNotBlank(url), SysComment::getUrl, url);
         return commentMapper.selectPage(page, queryWrapper);
     }
 

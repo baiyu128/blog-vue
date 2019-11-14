@@ -24,11 +24,10 @@ public interface CommentService extends IService<SysComment> {
     /**
      * 分页查询
      *
-     * @param comment
      * @param queryPage
      * @return
      */
-    IPage<SysComment> list(SysComment comment, QueryPage queryPage);
+    IPage<SysComment> list(String name,String url, QueryPage queryPage);
 
     /**
      * 分页查询并过滤留言数据

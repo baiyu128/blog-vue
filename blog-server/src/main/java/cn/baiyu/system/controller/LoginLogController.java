@@ -23,9 +23,9 @@ public class LoginLogController extends BaseController {
     @Autowired
     private LoginLogService loginLogService;
 
-    @PostMapping("/list")
-    public R findByPage(@RequestBody SysLoginLog sysLoginLog, QueryPage queryPage) {
-        return new R<>(super.getData(loginLogService.list(sysLoginLog, queryPage)));
+    @GetMapping("/list")
+    public R findByPage(String location, String filedTime, QueryPage queryPage) {
+        return new R<>(super.getData(loginLogService.list(location, filedTime, queryPage)));
     }
 
     @Log("删除登录日志")

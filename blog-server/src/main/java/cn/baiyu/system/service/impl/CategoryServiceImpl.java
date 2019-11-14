@@ -30,10 +30,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, SysCategory
     private ArticleCategoryService articleCategoryService;
 
     @Override
-    public IPage<SysCategory> list(SysCategory sysCategory, QueryPage queryPage) {
+    public IPage<SysCategory> list(String name, QueryPage queryPage) {
         IPage<SysCategory> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysCategory> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(sysCategory.getName()), SysCategory::getName, sysCategory.getName());
+        queryWrapper.like(StringUtils.isNotBlank(name), SysCategory::getName, name);
         queryWrapper.orderByDesc(SysCategory::getId);
         return categoryMapper.selectPage(page, queryWrapper);
     }

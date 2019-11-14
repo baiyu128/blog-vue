@@ -75,9 +75,9 @@ public class CommentController extends BaseController {
         return new R<>(map);
     }
 
-    @PostMapping("/list")
-    public R list(SysComment comment, QueryPage queryPage) {
-        return new R<>(super.getData(commentService.list(comment, queryPage)));
+    @GetMapping("/list")
+    public R list(String name,String url, QueryPage queryPage) {
+        return new R<>(super.getData(commentService.list(name, url, queryPage)));
     }
 
     @GetMapping("/{id}")

@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface LoginLogService  extends IService<SysLoginLog> {
 
-    IPage<SysLoginLog> list(SysLoginLog log, QueryPage queryPage);
+    IPage<SysLoginLog> list(String location, String filedTime, QueryPage queryPage);
 
     void delete(Long id);
 

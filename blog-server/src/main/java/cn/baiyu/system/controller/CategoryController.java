@@ -55,9 +55,9 @@ public class CategoryController extends BaseController {
         return new R<>(map);
     }
 
-    @PostMapping("/list")
-    public R<Map<String, Object>> list(@RequestBody SysCategory sysCategory, QueryPage queryPage) {
-        return new R<>(super.getData(categoryService.list(sysCategory, queryPage)));
+    @GetMapping("/list")
+    public R<Map<String, Object>> list(String name, QueryPage queryPage) {
+        return new R<>(super.getData(categoryService.list(name, queryPage)));
     }
 
     @GetMapping("/{id}")

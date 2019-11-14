@@ -2,9 +2,14 @@ import request from '@/utils/request'
 
 export function getCommentList(data, query) {
   return request({
-    url: `/api/comment/list?page=${query.page}&limit=${query.limit}`,
-    method: 'post',
-    data
+    url: `/api/comment/list`,
+    method: 'get',
+    params: {
+      name: data.name,
+      url: data.url,
+      page: query.page,
+      limit: query.limit
+    }
   })
 }
 

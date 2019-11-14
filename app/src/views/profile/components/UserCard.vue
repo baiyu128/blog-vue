@@ -25,15 +25,15 @@
         <div class="user-bio-section-body">
           <div class="progress-item">
             <span>Java</span>
-            <el-progress :percentage="40"/>
+            <el-progress :percentage="60"/>
           </div>
           <div class="progress-item">
             <span>Spring</span>
-            <el-progress :percentage="10"/>
+            <el-progress :percentage="50"/>
           </div>
           <div class="progress-item">
             <span>Spring Boot / Spring Cloud</span>
-            <el-progress :percentage="5"/>
+            <el-progress :percentage="70"/>
           </div>
           <div class="progress-item">
             <span>Vue</span>

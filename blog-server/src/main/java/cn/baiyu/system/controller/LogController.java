@@ -22,9 +22,9 @@ public class LogController extends BaseController {
     @Autowired
     private LogService logService;
 
-    @PostMapping("/list")
-    public R findByPage(@RequestBody SysLog log, QueryPage queryPage) {
-        return new R<>(super.getData(logService.list(log, queryPage)));
+    @GetMapping("/list")
+    public R findByPage(String username, String ip, QueryPage queryPage) {
+        return new R<>(super.getData(logService.list(username, ip, queryPage)));
     }
 
     @DeleteMapping("/{id}")
