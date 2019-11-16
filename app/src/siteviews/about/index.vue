@@ -14,7 +14,7 @@
         <p>普通的码农一枚</p>
         <p>如果你想跟我做朋友的话，必须欢迎，你可以通过博客页底的社交链接联系到我···</p>
         <ul>
-          <li><p><a href="https://baixixi.xyz/" target="_blank">Blog</a></p></li>
+          <li><p><a href="http://baixixi.xyz/" target="_blank">Blog</a></p></li>
           <li><p><a href="https://github.com/huanying137" target="_blank">Github</a></p></li>
           <li><p>QQ Group: 还 么 有 。。。</p></li>
         </ul>

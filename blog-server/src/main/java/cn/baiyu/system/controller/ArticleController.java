@@ -15,6 +15,7 @@ import cn.baiyu.system.entity.dto.ArchivesWithArticle;
 import cn.baiyu.system.service.ArticleService;
 import cn.baiyu.system.service.ArticleTagService;
 import cn.baiyu.system.service.CategoryService;
+import cn.baiyu.system.service.VisitLogService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -46,6 +47,9 @@ public class ArticleController extends BaseController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private VisitLogService visitLogService;
+
     /**
      * 查询文章前8条数量
      *
@@ -64,6 +68,9 @@ public class ArticleController extends BaseController {
      */
     @GetMapping({"/listForSite", "/listForSite/page/{p}"})
     public R listForSite(@PathVariable(required = false) String p) {
+        // 访问日志
+        visitLogService.saveLog();
+
         if (StringUtils.isBlank(p)) {
             p = "1";
         }
@@ -98,6 +105,12 @@ public class ArticleController extends BaseController {
     @GetMapping("/list")
     public R<Map<String, Object>> findByPage(ArticleRqVo articleRqVo, QueryPage queryPage) {
         return new R<>(super.getData(articleService.list(articleRqVo, queryPage)));
+    }
+
+    @GetMapping("/count")
+    public R count(){
+        LambdaQueryWrapper<SysArticle> queryWrapper = new LambdaQueryWrapper<>();
+        return new R<>(articleService.count(queryWrapper));
     }
 
     @GetMapping("{id}")

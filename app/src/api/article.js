@@ -64,3 +64,10 @@ export function del(id) {
     method: 'delete'
   })
 }
+
+export function count() {
+  return request({
+    url: `/api/article/count`,
+    method: 'get'
+  })
+}

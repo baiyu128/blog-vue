@@ -25,6 +25,8 @@ public class UserController extends BaseController {
     @GetMapping("/info")
     public R getInfo() {
         SysUser user = this.getCurrentUser();
+        user.setPassword(null);
+        user.setSalt(null);
         return new R<>(user);
     }
 

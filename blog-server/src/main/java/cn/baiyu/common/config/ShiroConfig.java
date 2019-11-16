@@ -110,6 +110,7 @@ public class ShiroConfig {
         ShiroProperties shiro = properties.getShiro();
         ShiroFilterFactoryBean filterFactoryBean = new ShiroFilterFactoryBean();
         filterFactoryBean.setSecurityManager(securityManager);
+        filterFactoryBean.setLoginUrl("/login");
         Map<String, String> filterChain = new LinkedHashMap<>();
         String[] urls = shiro.getAnonUrl().split(",");
         for (String url : urls) {

@@ -16,4 +16,6 @@ public interface LoginLogService  extends IService<SysLoginLog> {
     void delete(Long id);
 
     void saveLog(SysLoginLog log);
+
+    SysLoginLog lastLogin(String username);
 }

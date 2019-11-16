@@ -127,7 +127,7 @@
 
         this.form.state = 0
         add(this.form).then(res => {
-          console.log(res)
+          window.console.log(res)
           this.$message.success(res.msg)
           this.$router.replace('/admin/article/list')
         })
@@ -146,7 +146,7 @@
 
         this.form.state = 1
         add(this.form).then(res => {
-          console.log(res)
+          window.console.log(res)
           this.$message.success(res.msg)
           this.$router.replace('/admin/article/list')
         })

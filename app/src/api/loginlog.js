@@ -19,3 +19,10 @@ export function del(id) {
     method: 'delete'
   })
 }
+
+export function lastLogin() {
+  return request({
+    url: `/api/loginlog/last`,
+    method: 'get'
+  })
+}

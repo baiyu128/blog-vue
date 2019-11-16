@@ -6,6 +6,7 @@ import cn.baiyu.common.utils.QueryPage;
 import cn.baiyu.common.utils.R;
 import cn.baiyu.system.entity.SysLog;
 import cn.baiyu.system.service.LogService;
+import cn.baiyu.system.service.VisitLogService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class LogController extends BaseController {
     @Autowired
     private LogService logService;
 
+    @Autowired
+    private VisitLogService visitLogService;
+
     @GetMapping("/list")
     public R findByPage(String username, String ip, QueryPage queryPage) {
         return new R<>(super.getData(logService.list(username, ip, queryPage)));
@@ -35,5 +39,15 @@ public class LogController extends BaseController {
         } catch (Exception e) {
             throw new GlobalException(e.getMessage());
         }
+    }
+
+    @GetMapping("/visit")
+    public R visitPage(String time,QueryPage queryPage){
+        return new R<>(super.getData(visitLogService.list(time, queryPage)));
+    }
+
+    @GetMapping("/visitCount")
+    public R vitSum(String time){
+        return new R<>(visitLogService.count(time));
     }
 }

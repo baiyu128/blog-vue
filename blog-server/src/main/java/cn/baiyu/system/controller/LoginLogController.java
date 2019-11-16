@@ -6,8 +6,10 @@ import cn.baiyu.common.exception.GlobalException;
 import cn.baiyu.common.utils.QueryPage;
 import cn.baiyu.common.utils.R;
 import cn.baiyu.system.entity.SysLoginLog;
+import cn.baiyu.system.entity.SysUser;
 import cn.baiyu.system.service.LoginLogService;
 import io.swagger.annotations.Api;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +39,12 @@ public class LoginLogController extends BaseController {
         } catch (Exception e) {
             throw new GlobalException(e.getMessage());
         }
+    }
+
+    @GetMapping("/last")
+    public R last(){
+        SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
+        SysLoginLog loginLog = loginLogService.lastLogin(sysUser.getUsername());
+        return new R<>(loginLog);
     }
 }

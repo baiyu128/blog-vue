@@ -1,5 +1,6 @@
 package cn.baiyu.system.service.impl;
 
+import cn.baiyu.common.utils.DateUtil;
 import cn.baiyu.common.utils.QueryPage;
 import cn.baiyu.system.entity.SysLoginLog;
 import cn.baiyu.system.mapper.LoginLogMapper;
@@ -13,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @auther baiyu
@@ -48,5 +51,16 @@ public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, SysLoginLog
     @Transactional
     public void saveLog(SysLoginLog log) {
         loginLogMapper.insert(log);
+    }
+
+    @Override
+    public SysLoginLog lastLogin(String username) {
+        LambdaQueryWrapper<SysLoginLog> queryWrapper = new QueryWrapper<SysLoginLog>().lambda();
+        queryWrapper.eq(StringUtils.isNotBlank(username), SysLoginLog::getUsername, username);
+        queryWrapper.gt(SysLoginLog::getCreateTime, DateUtil.getSpecifiedDayBeforeOrAfter(1));
+        queryWrapper.orderByDesc(SysLoginLog::getCreateTime);
+        List<SysLoginLog> sysLoginLogs = loginLogMapper.selectList(queryWrapper);
+        if (!sysLoginLogs.isEmpty()) return sysLoginLogs.get(0);
+        return null;
     }
 }

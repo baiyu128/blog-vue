@@ -19,3 +19,13 @@ export function del(id) {
     method: 'delete'
   })
 }
+
+export function visitSum(time) {
+  return request({
+    url: `/api/log/visitCount`,
+    method: 'get',
+    params: {
+      time: time
+    }
+  })
+}

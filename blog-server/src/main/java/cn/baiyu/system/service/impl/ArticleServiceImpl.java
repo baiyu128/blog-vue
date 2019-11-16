@@ -55,10 +55,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, SysArticle> i
 
     @Override
     public IPage<SysArticle> list(ArticleRqVo articleRqVo, QueryPage queryPage) {
+        SysUser sysUser = (SysUser) SecurityUtils.getSubject().getPrincipal();
         IPage<SysArticle> page = new Page<>(queryPage.getPage(), queryPage.getLimit());
         LambdaQueryWrapper<SysArticle> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.orderByDesc(SysArticle::getId);
         queryWrapper.like(StringUtils.isNotBlank(articleRqVo.getTitle()), SysArticle::getTitle, articleRqVo.getTitle());
+        queryWrapper.eq(SysArticle::getAuthor, sysUser.getUsername());
         queryWrapper.like(StringUtils.isNotBlank(articleRqVo.getAuthor()), SysArticle::getAuthor, articleRqVo.getAuthor());
         queryWrapper.eq(StringUtils.isNotBlank(articleRqVo.getCategory()), SysArticle::getCategory, articleRqVo.getCategory());
         IPage<SysArticle> selectPage = articleMapper.selectPage(page, queryWrapper);

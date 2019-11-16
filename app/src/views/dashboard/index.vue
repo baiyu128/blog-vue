@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-editor-container">
-    <github-corner class="github-corner" />
+    <github-corner class="github-corner"/>
     <el-card class="welcome-card">
       <el-row :gutter="40">
         <el-card shadow="never" style="margin: 0 20px;">
@@ -12,7 +12,13 @@
                   <span id="welcome-message" v-html="welcomeMessage"></span>
                 </div>
                 <div class="user-login-info">
-                  上次登录时间：<span id="last-login-time">2019-11-13T08:45:36.000+0000</span>
+                  上次登录时间：<span id="last-login-time" v-text="lastLog.createTime"></span>/<span v-text="lastLog.device"></span>
+                </div>
+                <div>
+                  <span>介绍: </span><span class="user-detail" id="user-introduce" v-text="userinfo.introduce"></span>
+                </div>
+                <div>
+                  <span>备注: </span><span class="user-detail" id="user-remark" v-text="userinfo.remark"></span>
                 </div>
               </div>
             </div>
@@ -23,19 +29,19 @@
                 <div slot="header" class="box-text">
                   <span>今日IP</span>
                 </div>
-                <div class="box-num">12</div>
+                <div class="box-num" v-text="visit"></div>
               </el-card>
               <el-card class="box-card">
                 <div slot="header" class="box-text">
                   <span>文章总量</span>
                 </div>
-                <div class="box-num">12</div>
+                <div class="box-num" v-text="totalArticle"></div>
               </el-card>
               <el-card class="box-card">
                 <div slot="header" class="box-text">
                   <span>评论总量</span>
                 </div>
-                <div class="box-num">12</div>
+                <div class="box-num" v-text="totalComment"></div>
               </el-card>
             </div>
           </el-col>
@@ -67,7 +73,9 @@
                 </el-table-column>
                 <el-table-column class-name="status-col" label="状态" width="110" align="center">
                   <template slot-scope="scope">
-                    <el-tag :type="scope.row.state == '1' ? 'success' : 'warning'">{{ scope.row.state == '1' ? '已发布' : '未发布' }}</el-tag>
+                    <el-tag :type="scope.row.state == '1' ? 'success' : 'warning'">{{ scope.row.state == '1' ? '已发布' :
+                      '未发布' }}
+                    </el-tag>
                   </template>
                 </el-table-column>
               </el-table>
@@ -199,10 +207,13 @@
 
 <script>
   import { getCommentList } from '@/api/comment'
-  import { getArticleList } from '@/api/article'
+  import { getArticleList, count } from '@/api/article'
   import { mapGetters } from 'vuex'
   import GithubCorner from '@/components/GithubCorner'
   import PanThumb from '@/components/PanThumb'
+  import { getInfo } from '@/api/login'
+  import {lastLogin} from '@/api/loginlog'
+  import {visitSum} from '@/api/log'
 
   export default {
     name: 'DashboardAdmin',
@@ -226,8 +237,14 @@
           page: 1,
           limit: 10
         },
+        userinfo: {},
         activeName: 'first',
-        welcomeMessage: null
+        welcomeMessage: null,
+        totalArticle: null,
+        totalComment: null,
+        lastLog: {},
+        visit: null,
+        t: '2019-11-16'
       }
     },
     created() {
@@ -241,28 +258,42 @@
           this.articleList = response.data.rows
           this.listLoading = false
         })
+        count().then(response =>{
+          this.totalArticle = response.data
+        })
         getCommentList({}, this.listQuery).then(response => {
           this.commentList = response.data.rows
           this.listLoading = false
+          this.totalComment = response.data.total
+        })
+        lastLogin().then(response => {
+          this.lastLog = response.data
+        })
+        visitSum(this.t).then(response =>{
+          this.visit = response.data
         })
       },
 
       init() {
-        var hour = new Date().getHours();
-        var time = hour < 6 ? '早上好' : (hour <= 11 ? '上午好' : (hour <= 13 ? '中午好' : (hour <= 18 ? '下午好' : '晚上好')));
-        var welcomeArr = [
-          '喝杯咖啡休息下吧☕',
-          '要不要和朋友打局LOL',
-          '今天又写了几个Bug呢',
-          '今天在群里吹水了吗',
-          '今天吃了什么好吃的呢',
-          '今天您微笑了吗😊',
-          '今天帮助别人了吗',
-          '准备吃些什么呢',
-          '周末要不要去看电影？'
-        ];
-        var index = Math.floor((Math.random() * welcomeArr.length));
-        this.welcomeMessage = time + '，<a style="color: #5a8bff;">' + this.name + '</a>，' + welcomeArr[index];
+        getInfo().then(res => {
+          this.userinfo = res.data
+          var hour = new Date().getHours()
+          var time = hour < 6 ? '早上好' : (hour <= 11 ? '上午好' : (hour <= 13 ? '中午好' : (hour <= 18 ? '下午好' : '晚上好')))
+          var welcomeArr = [
+            '喝杯咖啡休息下吧☕',
+            '要不要和朋友打局王者荣耀?',
+            '下一场演唱会的门票买好了吗？',
+            '今天又写了几个Bug呢',
+            '今天在群里吹水了吗',
+            '今天吃了什么好吃的呢',
+            '今天您微笑了吗😊',
+            '今天帮助别人了吗',
+            '准备吃些什么呢',
+            '周末要不要去看电影？'
+          ]
+          var index = Math.floor((Math.random() * welcomeArr.length))
+          this.welcomeMessage = time + '，<a style="color: #5a8bff;">' + this.userinfo.nickname + '</a>，' + welcomeArr[index]
+        })
       }
 
     }
@@ -281,35 +312,49 @@
       border: 0;
       right: 0;
     }
-    .welcome-card{
+
+    .welcome-card {
       margin-bottom: 10px;
     }
+
     .welcome-text {
       color: rgba(0, 0, 0, 0.45);
       padding: .2rem;
       display: inline-block;
+
       .user-info {
         display: inline-block;
         vertical-align: top;
-        padding: 25px;
+        padding: 10px;
+        line-height: 1.5rem;
+
+        .user-detail {
+          color: #42b983;
+          font: 16px/1.5 'Microsoft YaHei', '宋体', Tahoma, Arial, sans-serif;
+        }
+
         .random-message {
           font-size: 1rem;
-          margin-bottom: 0.8rem;
+          /*margin-bottom: 0.8rem;*/
           max-width: 21rem;
         }
       }
     }
+
     .news-text {
       float: right;
       padding: .2rem;
+
       .box-card {
         padding: 0 10px;
         display: inline-block;
         border: none;
         box-shadow: none !important;
+
         /deep/ .el-card__header {
           border: none !important;
         }
+
         .box-num {
           font-size: 20px;
           font-weight: 700;
@@ -317,38 +362,47 @@
         }
       }
     }
+
     .project-card {
       .project-item {
         padding: .5rem 0.7rem;
         border: 1px solid #f1f1f1;
+
         .project-name {
           width: 100%;
           height: 24px;
+
           a {
             color: #42b983;
             font-size: .9rem;
             font-weight: 600;
           }
         }
+
         .project-desc {
           line-height: 24px;
           color: rgba(0, 0, 0, 0.45);
         }
       }
     }
+
     .info-card {
       margin-top: 10px;
+
       .info-item-card {
         /deep/ .el-card {
           border-radius: 0;
           border: 1px solid #e6e6e6;
         }
+
         .info-header {
           display: inline-block;
           width: 80px;
         }
+
         .info-text {
           display: inline-block;
+
           a {
             color: #5a8bff;
           }
@@ -357,7 +411,7 @@
     }
   }
 
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     .chart-wrapper {
       padding: 8px;
     }

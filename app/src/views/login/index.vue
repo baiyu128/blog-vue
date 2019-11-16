@@ -51,8 +51,8 @@
         bear: 'http://cdn.tycoding.cn/normal.0447fe9.png',
 
         loginForm: {
-          username: 'baixixi',
-          password: '123456'
+          username: '',
+          password: ''
         },
         loading: false,
         pwdType: 'password',
@@ -96,7 +96,7 @@
               this.loading = false
             })
           } else {
-            console.log('error submit!!')
+            window.console.log('error submit!!')
             return false
           }
         })

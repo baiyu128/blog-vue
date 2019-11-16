@@ -181,6 +181,19 @@ CREATE TABLE `tb_login_log` (
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for tb_visist_log
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_visit_log`;
+CREATE TABLE `tb_visit_log` (
+                                `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
+                                `ip` varchar(20) DEFAULT NULL COMMENT 'IP地址',
+                                `location` varchar(255) DEFAULT NULL COMMENT '登录地点',
+                                `create_time` datetime DEFAULT NULL COMMENT '登录时间',
+                                `device` varchar(255) DEFAULT NULL COMMENT '登录设备',
+                                PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Records of tb_login_log
 -- ----------------------------
 BEGIN;
@@ -219,6 +232,7 @@ CREATE TABLE `tb_user` (
   `avatar` varchar(200) DEFAULT NULL COMMENT '头像',
   `introduce` varchar(100) DEFAULT NULL COMMENT '介绍',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `nickname` varchar(20) not null comment '昵称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
 

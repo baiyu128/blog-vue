@@ -22,6 +22,8 @@ public class SysUser implements Serializable {
     @NotNull
     private String username;
 
+    private String nickname;
+
     @NotNull
     private String password;
 
