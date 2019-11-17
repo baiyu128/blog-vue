@@ -149,7 +149,7 @@
     height: 100%;
     width: 100%;
     background-color: #b8e5f8;
-    background-image: url("http://cdn.tycoding.cn/db29b0fbd2f78dd8c1b7.db29b0f.png");
+    background-image: url("http://img.baixixi.xyz/1573900452208.jpg");
     .login-form {
       position: absolute;
       left: 0;

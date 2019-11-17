@@ -35,7 +35,7 @@ CREATE TABLE `tb_article` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `type` int(11) DEFAULT '0' COMMENT '类型， 0原创 1转载',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of tb_article
@@ -55,7 +55,7 @@ CREATE TABLE `tb_article_category` (
   `article_id` bigint(20) NOT NULL COMMENT '文章ID',
   `category_id` bigint(20) NOT NULL COMMENT '分类ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='文章&&分类关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COMMENT='文章&&分类关联表';
 
 -- ----------------------------
 -- Records of tb_article_category
@@ -75,7 +75,7 @@ CREATE TABLE `tb_article_tag` (
   `article_id` bigint(20) NOT NULL COMMENT '文章ID',
   `tag_id` bigint(20) NOT NULL COMMENT '标签ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='文章&&标签关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COMMENT='文章&&标签关联表';
 
 -- ----------------------------
 -- Records of tb_article_tag
@@ -95,7 +95,7 @@ CREATE TABLE `tb_category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(100) DEFAULT NULL COMMENT '分类名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of tb_category
@@ -128,7 +128,7 @@ CREATE TABLE `tb_comment` (
   `device` varchar(100) DEFAULT NULL COMMENT '设备',
   `address` varchar(100) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8 COMMENT='评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb4 COMMENT='评论表';
 
 -- ----------------------------
 -- Table structure for tb_link
@@ -139,7 +139,7 @@ CREATE TABLE `tb_link` (
   `name` varchar(100) DEFAULT NULL COMMENT '连接名称',
   `url` varchar(200) DEFAULT NULL COMMENT '连接URL',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='友链表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='友链表';
 
 -- ----------------------------
 -- Records of tb_link
@@ -164,7 +164,7 @@ CREATE TABLE `tb_log` (
   `create_time` datetime DEFAULT NULL COMMENT '操作时间',
   `location` varchar(20) DEFAULT NULL COMMENT '操作地点',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='系统日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COMMENT='系统日志表';
 
 -- ----------------------------
 -- Table structure for tb_login_log
@@ -178,7 +178,7 @@ CREATE TABLE `tb_login_log` (
   `create_time` datetime DEFAULT NULL COMMENT '登录时间',
   `device` varchar(255) DEFAULT NULL COMMENT '登录设备',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for tb_visist_log
@@ -191,7 +191,7 @@ CREATE TABLE `tb_visit_log` (
                                 `create_time` datetime DEFAULT NULL COMMENT '登录时间',
                                 `device` varchar(255) DEFAULT NULL COMMENT '登录设备',
                                 PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of tb_login_log
@@ -208,7 +208,7 @@ CREATE TABLE `tb_tag` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(100) DEFAULT NULL COMMENT '标签名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='标签表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='标签表';
 
 -- ----------------------------
 -- Records of tb_tag
@@ -234,7 +234,7 @@ CREATE TABLE `tb_user` (
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
   `nickname` varchar(20) not null comment '昵称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of tb_user

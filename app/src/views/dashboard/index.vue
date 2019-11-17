@@ -12,7 +12,8 @@
                   <span id="welcome-message" v-html="welcomeMessage"></span>
                 </div>
                 <div class="user-login-info">
-                  上次登录时间：<span id="last-login-time" v-text="lastLog.createTime"></span>/<span v-text="lastLog.device"></span>
+                  上次登录时间：<span id="last-login-time" v-text="lastLog.createTime"></span>/<span
+                  v-text="lastLog.device"></span>
                 </div>
                 <div>
                   <span>介绍: </span><span class="user-detail" id="user-introduce" v-text="userinfo.introduce"></span>
@@ -207,13 +208,14 @@
 
 <script>
   import { getCommentList } from '@/api/comment'
-  import { getArticleList, count } from '@/api/article'
+  import { count, getArticleList } from '@/api/article'
   import { mapGetters } from 'vuex'
   import GithubCorner from '@/components/GithubCorner'
   import PanThumb from '@/components/PanThumb'
   import { getInfo } from '@/api/login'
-  import {lastLogin} from '@/api/loginlog'
-  import {visitSum} from '@/api/log'
+  import { lastLogin } from '@/api/loginlog'
+  import { visitSum } from '@/api/log'
+  import {today} from '@/utils'
 
   export default {
     name: 'DashboardAdmin',
@@ -244,7 +246,7 @@
         totalComment: null,
         lastLog: {},
         visit: null,
-        t: '2019-11-16'
+        t: null
       }
     },
     created() {
@@ -252,28 +254,6 @@
       this.init()
     },
     methods: {
-      fetchData() {
-        this.listLoading = true
-        getArticleList({}, this.listQuery).then(response => {
-          this.articleList = response.data.rows
-          this.listLoading = false
-        })
-        count().then(response =>{
-          this.totalArticle = response.data
-        })
-        getCommentList({}, this.listQuery).then(response => {
-          this.commentList = response.data.rows
-          this.listLoading = false
-          this.totalComment = response.data.total
-        })
-        lastLogin().then(response => {
-          this.lastLog = response.data
-        })
-        visitSum(this.t).then(response =>{
-          this.visit = response.data
-        })
-      },
-
       init() {
         getInfo().then(res => {
           this.userinfo = res.data
@@ -294,8 +274,28 @@
           var index = Math.floor((Math.random() * welcomeArr.length))
           this.welcomeMessage = time + '，<a style="color: #5a8bff;">' + this.userinfo.nickname + '</a>，' + welcomeArr[index]
         })
+      },
+      fetchData() {
+        this.listLoading = true
+        getArticleList({}, this.listQuery).then(response => {
+          this.articleList = response.data.rows
+          this.listLoading = false
+        })
+        count().then(response => {
+          this.totalArticle = response.data
+        })
+        getCommentList({}, this.listQuery).then(response => {
+          this.commentList = response.data.rows
+          this.listLoading = false
+          this.totalComment = response.data.total
+        })
+        lastLogin().then(response => {
+          this.lastLog = response.data
+        })
+        visitSum(today()).then(response => {
+          this.visit = response.data
+        })
       }
-
     }
   }
 </script>

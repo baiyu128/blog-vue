@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: 'Bai Yu',
+      logo: '/design.png'
     }
   }
 }
@@ -44,7 +44,7 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 70px;
   line-height: 50px;
   background: #2b2f3a;
   text-align: center;
@@ -55,10 +55,10 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       vertical-align: middle;
-      margin-right: 12px;
+      margin-right: 20px;
     }
 
     & .sidebar-title {
@@ -66,8 +66,8 @@ export default {
       margin: 0;
       color: #fff;
       font-weight: 600;
-      line-height: 50px;
-      font-size: 14px;
+      line-height: 80px;
+      font-size: 30px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
     }

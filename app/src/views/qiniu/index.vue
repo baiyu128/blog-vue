@@ -45,7 +45,7 @@
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             Edit
           </el-button>
-          <el-button size="mini" type="danger" @click="handleDel(row.id)">
+          <el-button size="mini" type="danger" @click="handleDel(row.name)">
             Delete
           </el-button>
         </template>
@@ -138,14 +138,14 @@
         this.dialogAddVisible = false
       },
 
-      handleDel(id) {
+      handleDel(name) {
         this.$confirm('你确定永久删除此条记录？', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
           center: true
         }).then(() => {
-          del(id).then(response => {
+          del(name).then(response => {
             this.$message.success(response.msg)
             this.fetchData();
           });

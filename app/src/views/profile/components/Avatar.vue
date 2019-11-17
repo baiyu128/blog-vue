@@ -49,6 +49,9 @@
             <img @click="editAvatar($event)" src="/avatar/20180414165955.jpg" title="点击更换">
             <img @click="editAvatar($event)" src="/avatar/20180414170003.jpg" title="点击更换">
         </el-tab-pane>
+          <el-tab-pane label="自定义" name="four">
+            <img @click="editAvatar($event)" src="/avatar/zhuyilong.png" title="点击更换">
+          </el-tab-pane>
         </el-tabs>
     </span>
   </el-dialog>

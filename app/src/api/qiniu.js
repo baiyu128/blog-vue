@@ -7,10 +7,13 @@ export function getList() {
   })
 }
 
-export function del(id) {
+export function del(name) {
   return request({
-    url: `/api/storage/qiniu/${id}`,
-    method: 'delete'
+    url: `/api/storage/qiniu/delete`,
+    method: 'delete',
+    params: {
+      name: name
+    }
   })
 }
 
