@@ -22,7 +22,7 @@
         <shiro-spring-version>1.7.1</shiro-spring-version>
         <shiro-ehcache.version>1.4.0</shiro-ehcache.version>
         <spring-aspects.version>5.0.7.RELEASE</spring-aspects.version>
-        <poi.version>3.17</poi.version>
+        <poi.version>4.1.1</poi.version>
         <hutool.version>4.6.3</hutool.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
         <fastjson.version>1.2.83</fastjson.version>
